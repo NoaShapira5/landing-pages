@@ -43,7 +43,7 @@ function CitizenRequestSpayingCats() {
   const getCaptchaRef = useRef(null);
   const [valid, setValid] = useState(false)
   const [formInput, setFormInput] = useState({
-    Date: new Date().toLocaleString('he-IL'),
+    Date: new Date().toISOString(),
     InquiryDetails:'',
     InquiryTypeID: 41,
     AnimalTypeID: 15,
@@ -78,7 +78,7 @@ function CitizenRequestSpayingCats() {
   const onSubmit = async (e) => {
     e.preventDefault()
     if(valid){
-      if(!formInput.firstName || !formInput.lastName || !formInput.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID) {
+      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID) {
         toast.error('יש למלא את כל שדות החובה')
         return
       }

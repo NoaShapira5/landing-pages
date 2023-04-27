@@ -38,7 +38,7 @@ function CenterRequestAnimal() {
   const [inquiryReporters, setInquiryReporters] = useState(['מוקד בני ברק' ,'רמת גן- מוקד' ,'פקח','עיריית הרצליה'])
   const [valid, setValid] = useState(false)
   const [formInput, setFormInput] = useState({
-    Date: new Date().toISOString().split('T')[0],
+    Date: new Date().toISOString(),
     InquiryDetails:'',
     InquiryTypeID: '',
     AnimalTypeID: '',
@@ -69,7 +69,7 @@ function CenterRequestAnimal() {
   const onSubmit = async (e) => {
     e.preventDefault()
     if(valid){
-      if(!formInput.firstName || !formInput.lastName || !formInput.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID || !formInput.ReferenceDetails || !formInput.InquiryReporter) {
+      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID || !formInput.ReferenceDetails || !formInput.InquiryReporter) {
         toast.error('יש למלא את כל שדות החובה')
         return
       }
@@ -133,10 +133,11 @@ function CenterRequestAnimal() {
         <form onSubmit={onSubmit} className='form'>
             <div className="form-group">
                 
-                <input type="date" className="form-control"
+                <input type="datetime-local " className="form-control"
                 id="Date" value={formInput.Date} onChange={onChange}
-                placeholder='תאריך'
-                dir="rtl" required readOnly/>       
+                placeholder='תאריך ושעה'
+                dir="rtl"
+                readOnly/>         
 
                 <p style={{textAlign: 'right'}}>פרטי הפונה</p>
 
