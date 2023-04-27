@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Secular One';
+  height: 100vh;
+  background-color: rgb(240, 240, 240);
+  margin: 0;
+  padding: 0;
+}
+
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  white-space: nowrap;
+  font-family: 'Secular One';
+  border: none;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+
+.btn:hover {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  background: #00ccbb;
+  color:rgb(255, 255, 255);
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  margin-top: 40px;
+}
+
+form {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #00a3a3;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: none ;
+  border: 2px solid #00a3a3;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.recaptcha > div > div {
+  display: flex;
+  place-content: center;
+}
