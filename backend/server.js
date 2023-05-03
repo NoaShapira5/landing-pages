@@ -92,7 +92,7 @@ router.post("/saveInquiry", async(req, res) => {
       if(data.Owners.length === 1) {
         formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
       } else if(data.Owners.length === 0) {
-        formInput = {...formInput, InquiryDetails: `${formInput.InquiryDetails} מאכיל ${feederDetails.firstName} ${feederDetails.lastName} טלפון - ${feederDetails.phone} אימייל - ${feederDetails.email}`}
+        formInput = {...formInput, InquiryDetails: `${formInput.InquiryDetails} מאכיל - ${feederDetails.firstName} ${feederDetails.lastName} טלפון - ${feederDetails.phone} אימייל - ${feederDetails.email}`}
       }
     }  
     const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Inquiries/SaveInquiry', {...formInput, Token: token})

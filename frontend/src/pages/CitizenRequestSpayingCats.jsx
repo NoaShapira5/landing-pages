@@ -26,7 +26,7 @@ function CitizenRequestSpayingCats() {
   const navigate = useNavigate()
   const cities = useFetch('/getCities')
 
-  const [feederIsTheReporter, setFeederIsTheReporter] = useState(false)
+  const [feederIsTheReporter, setFeederIsTheReporter] = useState(true)
   const [streets, setStreets] = useState([])
   const [ownerDetails, setOwnerDetails] = useState({
     firstName: '',
@@ -59,7 +59,7 @@ function CitizenRequestSpayingCats() {
     FeedingTimeTo: '',
     NumberOfCatsToCapture: '',
     IsFeederOwnerSameAsReporterOwner: '',
-    FeederOwnerID: ''
+    FeederOwnerID: '',
   })
 
   useEffect(() => {
@@ -157,36 +157,36 @@ function CitizenRequestSpayingCats() {
               <input type="datetime-local " className="form-control"
                 id="Date" value={formInput.Date} onChange={onChange}
                 placeholder='תאריך ושעה'
-                dir="rtl" required readOnly/>          
+                dir="rtl"  readOnly/>          
 
                 <p style={{textAlign: 'right'}}>פרטי הפונה</p>
 
                 <input type="text" className="form-control" 
                 id='firstName' onChange={onOwnerDetailsChange}
                 placeholder='שם פרטי*' value={ownerDetails.firstName} 
-                dir="rtl" required/>
+                dir="rtl" />
             
                 <input type="text" className="form-control" 
                 id='lastName' onChange={onOwnerDetailsChange}
                 placeholder='שם משפחה*' value={ownerDetails.lastName} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <input type="text" className="form-control" 
                 id='phone' onChange={onOwnerDetailsChange}
                 placeholder='טלפון*' value={ownerDetails.phone} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <input type="email" className="form-control" 
                 id='email' onChange={onOwnerDetailsChange}
                 placeholder='דוא"ל' value={ownerDetails.email} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <p style={{textAlign: 'right'}}>פרטי הפנייה</p>
 
                 <input type="text" className="form-control" 
                 id='InquiryDetails' value={formInput.InquiryDetails} onChange={onChange}
                 placeholder='פרטי הפנייה*' 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <p style={{textAlign: 'right'}}>מקום הפנייה</p>
 
@@ -215,7 +215,7 @@ function CitizenRequestSpayingCats() {
                 <input type="number" className="form-control" 
                 id='LocationHouseNumber' value={formInput.LocationHouseNumber} onChange={onChange}
                 placeholder='מספר בית' 
-                dir="rtl" required/>
+                dir="rtl" />
                 
                 <input type="number" className="form-control" 
                 id='LocationApartment' value={formInput.LocationApartment} onChange={onChange}
@@ -225,7 +225,7 @@ function CitizenRequestSpayingCats() {
                 <input type="text" className="form-control" 
                 id='LocationDescription' value={formInput.LocationDescription} onChange={onChange}
                 placeholder='תיאור מקום האירוע'
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <div dir="rtl" className="toggle" style={{display: 'flex', gap: '30px'}}>
                   <p dir="rtl">האם המאכיל הוא הפונה?</p>
@@ -250,31 +250,50 @@ function CitizenRequestSpayingCats() {
                 </div>
 
                 <p style={{textAlign: 'right'}}>פרטי האכלה</p>
+                {!feederIsTheReporter && (
+                  <>
+                    <input type="text" className="form-control" 
+                    id='firstName' onChange={onFeederDetailsChange}
+                    placeholder='שם פרטי' value={feederDetails.firstName} 
+                    dir="rtl" />
+                
+                    <input type="text" className="form-control" 
+                    id='lastName' onChange={onFeederDetailsChange}
+                    placeholder='שם משפחה' value={feederDetails.lastName} 
+                    dir="rtl" />
 
-                <input type="text" className="form-control" 
-                id='firstName' onChange={onFeederDetailsChange}
-                placeholder='שם פרטי' value={feederDetails.firstName} 
-                dir="rtl" required/>
-            
-                <input type="text" className="form-control" 
-                id='lastName' onChange={onFeederDetailsChange}
-                placeholder='שם משפחה' value={feederDetails.lastName} 
-                dir="rtl" required/>
+                    <input type="text" className="form-control" 
+                    id='phone' onChange={onFeederDetailsChange}
+                    placeholder='טלפון' value={feederDetails.phone} 
+                    dir="rtl" />
 
-                <input type="text" className="form-control" 
-                id='phone' onChange={onFeederDetailsChange}
-                placeholder='טלפון' value={feederDetails.phone} 
-                dir="rtl" required/>
+                    <input type="email" className="form-control" 
+                    id='email' onChange={onFeederDetailsChange}
+                    placeholder='דוא"ל' value={feederDetails.email} 
+                    dir="rtl" />
 
-                <input type="email" className="form-control" 
-                id='email' onChange={onFeederDetailsChange}
-                placeholder='דוא"ל' value={feederDetails.email} 
-                dir="rtl" required/>
-
+                  </>
+                )}
                 <input type="number" className="form-control"  
-                id='numOdCats' onChange={onChange}
+                id='NumberOfCatsToCapture' onChange={onChange}
                 placeholder='מספר חתולים לעיקור' value={formInput.NumberOfCatsToCapture} 
-                dir="rtl" required/>
+                dir="rtl" />
+                <p style={{textAlign: 'right'}}>:זמני האכלה</p>
+                <div style={{display: 'flex', flexDirection: 'row-reverse', gap: '10px', alignItems: 'center'}}>
+                  <p style={{textAlign: 'right', flexShrink: 0}}>:משעה</p>
+
+                  <input type="time" className="form-control"  
+                  id='FeedingTimeFrom' onChange={onChange}
+                  placeholder='משעה' value={formInput.FeedingTimeFrom} 
+                  dir="rtl" />
+
+                  <p style={{textAlign: 'right', flexShrink: 0}}>:עד שעה</p>
+                  <input type="time" className="form-control"  
+                  id='FeedingTimeTto' onChange={onChange}
+                  placeholder='עד שעה' value={formInput.FeedingTimeTo} 
+                  dir="rtl" />
+
+                </div>
 
                 <div className="recaptcha">
                   <ReCAPTCHA 

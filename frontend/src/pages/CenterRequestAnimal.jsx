@@ -50,7 +50,7 @@ function CenterRequestAnimal() {
     LocationDescription:'',
     ReferenceDetails:'',
     IsReporterOnSite:false,
-    InquiryReporter: ''
+    InquiryReporter: '',
   })
 
   useEffect(() => {
@@ -144,29 +144,29 @@ function CenterRequestAnimal() {
                 <input type="text" className="form-control" 
                 id='firstName' onChange={onOwnerDetailsChange}
                 placeholder='שם פרטי*' value={ownerDetails.firstName} 
-                dir="rtl" required/>
+                dir="rtl" />
             
                 <input type="text" className="form-control" 
                 id='lastName' onChange={onOwnerDetailsChange}
                 placeholder='שם משפחה*' value={ownerDetails.lastName} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <input type="text" className="form-control" 
                 id='phone' onChange={onOwnerDetailsChange}
                 placeholder='טלפון*' value={ownerDetails.phone} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <input type="email" className="form-control" 
                 id='email' onChange={onOwnerDetailsChange}
                 placeholder='דוא"ל' value={ownerDetails.email} 
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <p style={{textAlign: 'right'}}>פרטי הפנייה</p>
 
                 <input type="text" className="form-control" 
                 id='InquiryDetails' value={formInput.InquiryDetails} onChange={onChange}
                 placeholder='פרטי הפנייה*' 
-                dir="rtl" required/>
+                dir="rtl" />
 
                <div className="select-container" style={{textAlign: 'right', fontSize: '13px', marginBottom: '10px'}}>
                   <Select
@@ -223,7 +223,7 @@ function CenterRequestAnimal() {
                   onChange={(data) => setFormInput({...formInput, LocationCityID: data.value})}
                   theme={theme}
                   isRtl
-                  required
+                 
                   />
                 </div>
 
@@ -252,7 +252,7 @@ function CenterRequestAnimal() {
                 <input type="text" className="form-control" 
                 id='LocationDescription' value={formInput.LocationDescription} onChange={onChange}
                 placeholder='תיאור מקום האירוע'
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <div dir="rtl" className="toggle" style={{display: 'flex', gap: '30px'}}>
                   <p dir="rtl">האם הפונה נמצא במקום האירוע?</p>
@@ -290,9 +290,9 @@ function CenterRequestAnimal() {
                 </div>
 
                 <input type="text" className="form-control" 
-                id='RefrenceDetails' value={formInput.ReferenceDetails} onChange={onChange}
+                id='ReferenceDetails' value={formInput.ReferenceDetails} onChange={onChange}
                 placeholder='אסמכתא (מספר פנייה במוקד)*'
-                dir="rtl" required/>
+                dir="rtl" />
 
                 <div className="recaptcha">
                   <ReCAPTCHA 

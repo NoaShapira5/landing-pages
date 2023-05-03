@@ -54,7 +54,7 @@ function CitizenRequestAnimal() {
     LocationStreet: '',
     LocationDescription:'',
     IsReporterOnSite: false,
-    InquiryReporterID: 7
+    InquiryReporterID: 7,
   })
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function CitizenRequestAnimal() {
     e.preventDefault()  
     if(valid){
       
-      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID) {
+      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID || !ownerDetails.email) {
         toast.error('יש למלא את כל שדות החובה')
         return
       }
@@ -169,7 +169,7 @@ function CitizenRequestAnimal() {
 
                 <input type="email" className="form-control" 
                 id='email' onChange={onOwnerDetailsChange}
-                placeholder='דוא"ל' value={ownerDetails.email} 
+                placeholder='דוא"ל*' value={ownerDetails.email} 
                 dir="rtl"/>
 
                 <p style={{textAlign: 'right'}}>פרטי הפנייה</p>
