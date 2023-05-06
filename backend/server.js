@@ -89,14 +89,14 @@ router.post("/saveInquiry", async(req, res) => {
     }
     if(feederDetails) {
       const {data} = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners', {SearchTerm: feederDetails.phone, Token: token})
-      console.log('before', data.Owners)
       if(data.Owners.length !== 0) {
-        console.log('after', data.Owners)
         formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
       } else if(data.Owners.length === 0) {
         formInput = {...formInput, InquiryDetails: `${formInput.InquiryDetails} מאכיל - ${feederDetails.firstName} ${feederDetails.lastName} טלפון - ${feederDetails.phone} אימייל - ${feederDetails.email}`}
       }
-    }  
+    } else {
+      formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
+    } 
     const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Inquiries/SaveInquiry', {...formInput, Token: token})
     return res.status(200).json(resData.data)
   } catch(error) {

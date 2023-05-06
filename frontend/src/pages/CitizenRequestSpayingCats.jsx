@@ -26,7 +26,6 @@ function CitizenRequestSpayingCats() {
   const navigate = useNavigate()
   const cities = useFetch('/getCities')
 
-  const [feederIsTheReporter, setFeederIsTheReporter] = useState(true)
   const [streets, setStreets] = useState([])
   const [ownerDetails, setOwnerDetails] = useState({
     firstName: '',
@@ -58,7 +57,7 @@ function CitizenRequestSpayingCats() {
     FeedingTimeFrom: '',
     FeedingTimeTo: '',
     NumberOfCatsToCapture: '',
-    IsFeederOwnerSameAsReporterOwner: '',
+    IsFeederOwnerSameAsReporterOwner: true,
     FeederOwnerID: '',
   })
 
@@ -230,8 +229,8 @@ function CitizenRequestSpayingCats() {
                   <p dir="rtl">האם המאכיל/ה הוא/היא הפונה?</p>
                   <label htmlFor="material-switch">
                     <ReactSwitch
-                      checked={feederIsTheReporter}
-                      onChange={ (val) => {setFeederIsTheReporter(val)}}
+                      checked={formInput.IsFeederOwnerSameAsReporterOwner}
+                      onChange={ (val) => {setFormInput({...formInput, IsFeederOwnerSameAsReporterOwner: val})}}
                       onColor="#86d3ff"
                       onHandleColor="#2693e6"
                       handleDiameter={30}
@@ -244,12 +243,12 @@ function CitizenRequestSpayingCats() {
                       className="react-switch"
                       id="material-switch"
                     />
-                    {feederIsTheReporter ? (<span>כן</span>) : (<span>לא</span>)}
+                    {formInput.IsFeederOwnerSameAsReporterOwner ? (<span>כן</span>) : (<span>לא</span>)}
                   </label>
                 </div>
 
                 <p style={{textAlign: 'right'}}>פרטי האכלה</p>
-                {!feederIsTheReporter && (
+                {!formInput.IsFeederOwnerSameAsReporterOwner && (
                   <>
                     <input type="text" className="form-control" 
                     id='firstName' onChange={onFeederDetailsChange}
