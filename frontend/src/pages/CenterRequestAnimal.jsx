@@ -172,7 +172,6 @@ function CenterRequestAnimal() {
                   <Select
                   options={inquiryTypes && inquiryTypes.data.InquiryTypes.map(type => ({label: type.Name, value: type.ID}))}
                   placeholder="-- בחר את נושא הפנייה --"
-                  value={formInput.InquiryTypeID}
                   onChange={(data) => setFormInput({...formInput, InquiryTypeID: data.value})}
                   theme={theme}
                   isRtl
@@ -184,7 +183,7 @@ function CenterRequestAnimal() {
                   options={animalTypes.data && animalTypes.data.Types.map(item => ({label: item.Name, value: item.ID}))}
                   placeholder="-- בחר סוג בעל חיים --"
                   value={formInput.AnimalTypeID}
-                  onChange={(data) => setFormInput({...formInput, AnimalTypeID: data})}
+                  onChange={(data) => setFormInput({...formInput, AnimalTypeID: data.value})}
                   theme={theme}
                   isRtl
                   />
