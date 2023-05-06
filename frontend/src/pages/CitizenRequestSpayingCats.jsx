@@ -51,7 +51,7 @@ function CitizenRequestSpayingCats() {
     LocationCityID: '',
     LocationHouseNumber:'',
     LocationApartment:'',
-    LocationStreet: '',
+    LocationStreetID: '',
     LocationDescription:'',
     IsReporterOnSite:false,
     InquiryReporter: 'אזרח',
@@ -203,10 +203,9 @@ function CitizenRequestSpayingCats() {
 
                 <div className="select-container" style={{textAlign: 'right', fontSize: '13px', marginBottom: '10px'}}>
                   <Select
-                  options={ streets && streets.map(item => ({label: item.Name, value: item.Name}))}
+                  options={ streets && streets.map(item => ({label: item.Name, value: item.ID}))}
                   placeholder="-- בחר רחוב --"
-                  // value={formInput.LocationStreet}
-                  onChange={(data) => setFormInput({...formInput, LocationStreet: data.value})}
+                  onChange={(data) => setFormInput({...formInput, LocationStreetID: data.value})}
                   theme={theme}
                   isRtl
                   />
@@ -228,7 +227,7 @@ function CitizenRequestSpayingCats() {
                 dir="rtl" />
 
                 <div dir="rtl" className="toggle" style={{display: 'flex', gap: '30px'}}>
-                  <p dir="rtl">האם המאכיל הוא הפונה?</p>
+                  <p dir="rtl">האם המאכיל/ה הוא/היא הפונה?</p>
                   <label htmlFor="material-switch">
                     <ReactSwitch
                       checked={feederIsTheReporter}
@@ -280,18 +279,18 @@ function CitizenRequestSpayingCats() {
                 dir="rtl" />
                 <p style={{textAlign: 'right'}}>:זמני האכלה</p>
                 <div style={{display: 'flex', flexDirection: 'row-reverse', gap: '10px', alignItems: 'center'}}>
-                  <p style={{textAlign: 'right', flexShrink: 0}}>:משעה</p>
+                  <p style={{textAlign: 'right', flexShrink: 0}}>:שעה</p>
 
                   <input type="time" className="form-control"  
                   id='FeedingTimeFrom' onChange={onChange}
-                  placeholder='משעה' value={formInput.FeedingTimeFrom} 
-                  dir="rtl" />
+                  value={formInput.FeedingTimeFrom} 
+                  />
 
-                  <p style={{textAlign: 'right', flexShrink: 0}}>:עד שעה</p>
+                  <p style={{textAlign: 'right', flexShrink: 0}}>:שעה נוספת</p>
                   <input type="time" className="form-control"  
-                  id='FeedingTimeTto' onChange={onChange}
-                  placeholder='עד שעה' value={formInput.FeedingTimeTo} 
-                  dir="rtl" />
+                  id='FeedingTimeTo' onChange={onChange}
+                  value={formInput.FeedingTimeTo} 
+                  />
 
                 </div>
 

@@ -51,7 +51,7 @@ function CitizenRequestAnimal() {
     LocationCityID: '',
     LocationHouseNumber:'',
     LocationApartment:'',
-    LocationStreet: '',
+    LocationStreetID: '',
     LocationDescription:'',
     IsReporterOnSite: false,
     InquiryReporterID: 7,
@@ -241,9 +241,9 @@ function CitizenRequestAnimal() {
 
                 <div className="select-container" style={{textAlign: 'right', fontSize: '13px', marginBottom: '10px'}}>
                   <Select
-                  options={ streets && streets.map(item => ({label: item.Name, value: item.Name}))}
+                  options={ streets && streets.map(item => ({label: item.Name, value: item.ID}))}
                   placeholder="-- בחר רחוב --"
-                  onChange={(data) => setFormInput({...formInput, LocationStreet: data.value})}
+                  onChange={(data) => setFormInput({...formInput, LocationStreetID: data.value})}
                   theme={theme}
                   isRtl
                   />

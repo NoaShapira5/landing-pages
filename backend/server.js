@@ -82,14 +82,16 @@ router.post("/saveInquiry", async(req, res) => {
     let {formInput, ownerDetails, feederDetails} = req.body 
     const token = await tokenProvider.getToken()
     const {data} = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners', {SearchTerm: ownerDetails.phone, Token: token})
-    if(data.Owners.length === 1) {
+    if(data.Owners.length !== 0) {
       formInput = {...formInput, ReporterOwnerID: data.Owners[0].ID, ReporterOwnerDisplayName: `${data.Owners[0].FirstName}, ${data.Owners[0].LastName}, ${data.Owners[0].Phone1}, ${data.Owners[0].EmailAddress}, ${data.Owners[0].Street} ${data.Owners[0].HouseNumber}, ${data.Owners[0].City}`}
     } else if(data.Owners.length === 0) {
       formInput = {...formInput, InquiryDetails: `${formInput.InquiryDetails} פונה - ${ownerDetails.firstName} ${ownerDetails.lastName} טלפון - ${ownerDetails.phone} אימייל - ${ownerDetails.email}`}
     }
     if(feederDetails) {
       const {data} = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners', {SearchTerm: feederDetails.phone, Token: token})
-      if(data.Owners.length === 1) {
+      console.log('before', data.Owners)
+      if(data.Owners.length !== 0) {
+        console.log('after', data.Owners)
         formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
       } else if(data.Owners.length === 0) {
         formInput = {...formInput, InquiryDetails: `${formInput.InquiryDetails} מאכיל - ${feederDetails.firstName} ${feederDetails.lastName} טלפון - ${feederDetails.phone} אימייל - ${feederDetails.email}`}

@@ -173,7 +173,7 @@ function CenterRequestAnimal() {
                   options={inquiryTypes && inquiryTypes.data.InquiryTypes.map(type => ({label: type.Name, value: type.ID}))}
                   placeholder="-- בחר את נושא הפנייה --"
                   value={formInput.InquiryTypeID}
-                  onChange={(data) => setFormInput({...formInput, InquiryTypeID: data})}
+                  onChange={(data) => setFormInput({...formInput, InquiryTypeID: data.value})}
                   theme={theme}
                   isRtl
                   />
@@ -230,10 +230,9 @@ function CenterRequestAnimal() {
 
                 <div className="select-container" style={{textAlign: 'right', fontSize: '13px', marginBottom: '10px'}}>
                   <Select
-                  options={ streets && streets.map(item => ({label: item.Name, value: item.Name}))}
+                  options={ streets && streets.map(item => ({label: item.Name, value: item.ID}))}
                   placeholder="-- בחר רחוב --"
-                  value={formInput.LocationStreet}
-                  onChange={(data) => setFormInput({...formInput, LocationStreet: data})}
+                  onChange={(data) => setFormInput({...formInput, LocationStreetID: data.value})}
                   theme={theme}
                   isRtl
                   />
