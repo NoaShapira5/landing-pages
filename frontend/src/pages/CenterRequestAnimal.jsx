@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
 import mainLogo from '../logos/mainLogo.png'
 import ReactSwitch from "react-switch"
@@ -23,10 +24,13 @@ const theme = theme => ({
 
 function CenterRequestAnimal() {
 
+  const navigate = useNavigate()
+
   const cities = useFetch('/getCities')
   const animalTypes = useFetch('/getAnimalTypes')
   const inquiryTypes = useFetch('/getInquiryTypes')
 
+  const [isLoading, setIsLoading] = useState(false)
   const [streets, setStreets] = useState([])
   const [ownerDetails, setOwnerDetails] = useState({
     firstName: '',
@@ -73,12 +77,15 @@ function CenterRequestAnimal() {
         toast.error('יש למלא את כל שדות החובה')
         return
       }
+      setIsLoading(true)
       const res = await axios.post('/saveInquiry', {formInput, ownerDetails})
+      setIsLoading(false)
         if(res.data.loading) {
           return <Spinner />
         }
         if(res.data.IsSuccess) {
           toast.success('הפניה נוצרה בהצלחה')
+          navigate(`/citizenRequestAnimal/${res.data.SequenceID}`)
         } else {
           toast.error('שגיאה ביצירת הפניה')
         }
@@ -117,7 +124,7 @@ function CenterRequestAnimal() {
     });
   };
 
-  if(cities.loading || animalTypes.loading || inquiryTypes.loading) {
+  if(cities.loading || animalTypes.loading || inquiryTypes.loading|| isLoading) {
     return <Spinner />
   }
 

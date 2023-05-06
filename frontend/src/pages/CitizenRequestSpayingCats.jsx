@@ -53,7 +53,7 @@ function CitizenRequestSpayingCats() {
     LocationStreetID: '',
     LocationDescription:'',
     IsReporterOnSite:false,
-    InquiryReporter: 'אזרח',
+    InquiryReporterID: 7,
     FeedingTimeFrom: '',
     FeedingTimeTo: '',
     NumberOfCatsToCapture: '',

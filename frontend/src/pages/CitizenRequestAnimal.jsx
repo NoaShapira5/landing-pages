@@ -26,7 +26,7 @@ const theme = theme => ({
 
 function CitizenRequestAnimal() {
 
-  const naviagte = useNavigate()
+  const navigate = useNavigate()
 
   const cities = useFetch('/getCities')
   const animalTypes = useFetch('/getAnimalTypes')
@@ -83,7 +83,7 @@ function CitizenRequestAnimal() {
         setIsLoading(false)
         if(res.data.IsSuccess) {
           toast.success('הפניה נוצרה בהצלחה')
-          naviagte(`/citizenRequestAnimal/${res.data.SequenceID}`)
+          navigate(`/citizenRequestAnimal/${res.data.SequenceID}`)
         } else {
           toast.error('שגיאה ביצירת הפניה')
         }
