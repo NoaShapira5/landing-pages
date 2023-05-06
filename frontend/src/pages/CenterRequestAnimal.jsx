@@ -288,7 +288,7 @@ function CenterRequestAnimal() {
                   options={ inquiryReporters && inquiryReporters.map(reporter => ({label: reporter, value: reporter}))}
                   placeholder="גורם מדווח"
                   value={formInput.InquiryReporter}
-                  onChange={(data) => setFormInput({...formInput, InquiryReporter: data})}
+                  onChange={(data) => setFormInput({...formInput, InquiryReporter: data.value})}
                   theme={theme}
                   isRtl
                   />
