@@ -39,7 +39,7 @@ function CenterRequestAnimal() {
     email: ''
   })
   const getCaptchaRef = useRef(null);
-  const [inquiryReporters, setInquiryReporters] = useState(['מוקד בני ברק' ,'רמת גן- מוקד' ,'פקח','עיריית הרצליה'])
+  const [inquiryReporters, setInquiryReporters] = useState([{label:'מוקד בני ברק', value:11}  ,{label:'רמת גן- מוקד', value: 16 },{label:'פקח',value: 1},{label: 'עיריית הרצליה',value: 2}])
   const [valid, setValid] = useState(false)
   const [formInput, setFormInput] = useState({
     Date: new Date().toISOString(),
@@ -54,7 +54,7 @@ function CenterRequestAnimal() {
     LocationDescription:'',
     ReferenceDetails:'',
     IsReporterOnSite:false,
-    InquiryReporter: '',
+    InquiryReporterID: '',
   })
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function CenterRequestAnimal() {
   const onSubmit = async (e) => {
     e.preventDefault()
     if(valid){
-      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID || !formInput.ReferenceDetails || !formInput.InquiryReporter) {
+      if(!ownerDetails.firstName || !ownerDetails.lastName || !ownerDetails.phone || !formInput.InquiryDetails || !formInput.InquiryTypeID || !formInput.LocationCityID || !formInput.ReferenceDetails || !formInput.InquiryReporterID) {
         toast.error('יש למלא את כל שדות החובה')
         return
       }
@@ -85,7 +85,7 @@ function CenterRequestAnimal() {
         }
         if(res.data.IsSuccess) {
           toast.success('הפניה נוצרה בהצלחה')
-          navigate(`/citizenRequestAnimal/${res.data.SequenceID}`)
+          navigate(`/centerRequestAnimal/${res.data.SequenceID}`)
         } else {
           toast.error('שגיאה ביצירת הפניה')
         }
@@ -189,7 +189,6 @@ function CenterRequestAnimal() {
                   <Select
                   options={animalTypes.data && animalTypes.data.Types.map(item => ({label: item.Name, value: item.ID}))}
                   placeholder="-- בחר סוג בעל חיים --"
-                  value={formInput.AnimalTypeID}
                   onChange={(data) => setFormInput({...formInput, AnimalTypeID: data.value})}
                   theme={theme}
                   isRtl
@@ -285,10 +284,9 @@ function CenterRequestAnimal() {
 
                 <div className="select-container" style={{textAlign: 'right', fontSize: '13px', marginBottom: '10px'}}>
                   <Select
-                  options={ inquiryReporters && inquiryReporters.map(reporter => ({label: reporter, value: reporter}))}
+                  options={ inquiryReporters }
                   placeholder="גורם מדווח"
-                  value={formInput.InquiryReporter}
-                  onChange={(data) => setFormInput({...formInput, InquiryReporter: data.value})}
+                  onChange={(data) => setFormInput({...formInput, InquiryReporterID: data.value})}
                   theme={theme}
                   isRtl
                   />

@@ -15,6 +15,7 @@ function App() {
           <Route path='/' element={<Navigate to='/citizenRequestAnimal' replace />} />
           <Route path="/citizenRequestAnimal" element={<CitizenRequestAnimal />}/>
           <Route path="/citizenRequestAnimal/:sequenceID" element={<AcceptedRequest />}/>
+          <Route path="/centerRequestAnimal/:sequenceID" element={<AcceptedRequest />}/>          
           <Route path="/citizenRequestSpayingCats" element={<CitizenRequestSpayingCats />}/>
           <Route path="/citizenRequestSpayingCats/:sequenceID" element={<AcceptedRequestSpayingCats />} />
           <Route path="/centerRequestAnimal" element={<CenterRequestAnimal />}/>
