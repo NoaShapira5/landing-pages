@@ -26,6 +26,7 @@ function CitizenRequestSpayingCats() {
   const navigate = useNavigate()
   const cities = useFetch('/getCities')
 
+  const [isLoading, setIsLoading] = useState(false)
   const [streets, setStreets] = useState([])
   const [ownerDetails, setOwnerDetails] = useState({
     firstName: '',
@@ -83,9 +84,13 @@ function CitizenRequestSpayingCats() {
       }
       let res
       if(!formInput.IsFeederOwnerSameAsReporterOwner) {
+        setIsLoading(true)
         res = await axios.post('/saveInquiry', {formInput, ownerDetails, feederDetails})
+        setIsLoading(false)
       } else {
+        setIsLoading(true)
         res = await axios.post('/saveInquiry', {formInput, ownerDetails})
+        setIsLoading(false)
       }
       
       if(res.data.IsSuccess) {
@@ -137,7 +142,7 @@ function CitizenRequestSpayingCats() {
     });
   };
 
-  if(cities.loading) {
+  if(cities.loading || isLoading) {
     return <Spinner />
   }
 
