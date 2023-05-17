@@ -9,7 +9,7 @@ class TokenProvider {
     async getToken() { 
         if(!this.token || this.expireDate > new Date()) {
             try {
-                const res = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authentication/GetToken`, {ApiKey: process.env.API_KEY, ApiPassword: process.env.API_PASSWORD})
+                const res = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authentication/GetToken${process.env.SECRET}`, {ApiKey: process.env.API_KEY, ApiPassword: process.env.API_PASSWORD})
                 if(res.data.IsSuccess) {
                     this.token = res.data.Token
                     this.expireDate = res.data.ExpireDate

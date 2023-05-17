@@ -36,32 +36,32 @@ router.post("/status", async (req, res) => {
 
 router.post("/getCities", async (req, res) => {
   const token = await tokenProvider.getToken()
-  const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Authority/GetCities', {Token: token})
+  const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authority/GetCities${process.env.SECRET}`, {Token: token, IsGetOnlyManagedByAuthority: true})
   return res.status(200).json(resData.data)
 })
 
-router.post("/getToken", async (req, res) => {
-  try {
-    const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authentication/GetToken`, {ApiKey: process.env.API_KEY, ApiPassword: process.env.API_PASSWORD})
-    res.status(200).json(resData.data)
-  }
-  catch (error) {
-    console.warn(error)
-    res.status(500).json(error)
-  }
+// router.post("/getToken", async (req, res) => {
+//   try {
+//     const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authentication/GetToken`, {ApiKey: process.env.API_KEY, ApiPassword: process.env.API_PASSWORD})
+//     res.status(200).json(resData.data)
+//   }
+//   catch (error) {
+//     console.warn(error)
+//     res.status(500).json(error)
+//   }
 
  
-})
+// })
 
 router.post("/getAnimalTypes", async(req, res) => {
   const token = await tokenProvider.getToken()
-  const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Authority/GetAnimalTypes', {Token: token})
+  const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authority/GetAnimalTypes${process.env.SECRET}`, {Token: token})
   return res.status(200).json(resData.data)
 })
 
 router.post("/getInquiryTypes", async(req, res) => {
   const token = await tokenProvider.getToken()
-  const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Inquiries/GetInquiryTypes', {Token: token})
+  const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Inquiries/GetInquiryTypes${process.env.SECRET}`, {Token: token})
   return res.status(200).json(resData.data)
 })
 
@@ -69,7 +69,7 @@ router.post("/getStreets", async(req, res) => {
   try {
     const {CityID} = req.body
     const token = await tokenProvider.getToken()
-    const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Authority/GetStreets', {Token: token, CityID })
+    const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Authority/GetStreets${process.env.SECRET}`, {Token: token, CityID })
     return res.status(200).json(resData.data)
   } catch (error) {
     res.json(error)
@@ -81,7 +81,7 @@ router.post("/saveInquiry", async(req, res) => {
   try {
     let {formInput, ownerDetails, feederDetails} = req.body 
     const token = await tokenProvider.getToken()
-    const {data} = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners', {SearchTerm: ownerDetails.phone, Token: token})
+    const {data} = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners${process.env.SECRET}`, {SearchTerm: ownerDetails.phone, Token: token})
     console.log(data.Owners.length)
     if(data.Owners.length !== 0) {
       formInput = {...formInput, ReporterOwnerID: data.Owners[0].ID, ReporterOwnerDisplayName: `${data.Owners[0].FirstName}, ${data.Owners[0].LastName}, ${data.Owners[0].Phone1}, ${data.Owners[0].EmailAddress}, ${data.Owners[0].Street} ${data.Owners[0].HouseNumber}, ${data.Owners[0].City}`}
@@ -94,7 +94,7 @@ router.post("/saveInquiry", async(req, res) => {
           formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
         }
       } else {
-        const {data} = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners', {SearchTerm: feederDetails.phone, Token: token})      
+        const {data} = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Owners/GetOwners${process.env.SECRET}`, {SearchTerm: feederDetails.phone, Token: token})      
         if(data.Owners.length !== 0) {
           formInput = {...formInput, FeederOwnerID: data.Owners[0].ID}
         } else if(data.Owners.length === 0) {
@@ -103,7 +103,7 @@ router.post("/saveInquiry", async(req, res) => {
       }
       
     }
-    const resData = await axios.post('https://externalapiauthority.vetclick.co.il/V1/Inquiries/SaveInquiry', {...formInput, Token: token})
+    const resData = await axios.post(`https://externalapiauthority.vetclick.co.il/V1/Inquiries/SaveInquiry${process.env.SECRET}`, {...formInput, Token: token})
     return res.status(200).json(resData.data)
   } catch(error) {
     console.log(error)
